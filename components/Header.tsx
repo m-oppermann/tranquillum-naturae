@@ -8,7 +8,7 @@ export default function HeaderComponent() {
           Home
         </Link>
         <span>, </span>
-        <Link href="/" aria-label="About">
+        <Link href="/about" aria-label="About">
           About
         </Link>
       </nav>
