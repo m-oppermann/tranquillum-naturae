@@ -1,7 +1,7 @@
 import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { clsx } from "clsx"
-import { inter } from "@/lib/fonts"
+import { NeueMontreal } from "@/styles/fonts"
 import Header from "@/components/Header"
 
 export const metadata: Metadata = {
@@ -18,8 +18,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body
         className={clsx(
-          "bg-white font-sans text-black antialiased",
-          inter.variable,
+          "bg-sand-1 text-sand-8 font-sans font-medium antialiased",
+          NeueMontreal.variable,
         )}
       >
         <Header />
