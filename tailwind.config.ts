@@ -14,6 +14,18 @@ const config: Config = {
       sans: ["var(--font-neue-montreal)", "sans-serif"],
       serif: ["var(--font-editorial-old)", "serif"],
     },
+    fontSize: {
+      xs: ["0.75rem", "160%"],
+      sm: ["0.875rem", "160%"],
+      base: ["1rem", "140%"],
+      lg: ["1.125rem", "140%"],
+      xl: ["1.25rem", "140%"],
+      "2xl": ["1.5rem", "130%"],
+      "3xl": ["2rem", "130%"],
+      "4xl": ["2.5rem", "130%"],
+      "5xl": ["3rem", "120%"],
+      "6xl": ["3.75rem", "120%"],
+    },
     colors: {
       sand: {
         1: "hsl(60, 20%, 99%)",
