@@ -18,8 +18,13 @@ export default function HeaderComponent({ className }: HeaderProps) {
   }
 
   return (
-    <header className={clsx("grid grid-cols-12 gap-4 text-lg", className)}>
-      <nav className="col-span-3 grid grid-cols-3 gap-4">
+    <header
+      className={clsx(
+        "grid grid-cols-4 gap-4 text-sm sm:grid-cols-6 sm:text-base lg:grid-cols-8 xl:grid-cols-12 2xl:text-lg",
+        className,
+      )}
+    >
+      <nav className="col-span-2 col-start-1 grid grid-cols-2 place-items-start gap-4 xl:col-span-3 xl:grid-cols-3">
         <Link
           href="/"
           className={clsx("col-start-1", pathname === "/" && "font-bold")}
@@ -27,14 +32,17 @@ export default function HeaderComponent({ className }: HeaderProps) {
           t-n
         </Link>
         <Link
-          className={clsx("col-start-3", pathname === "/about" && "font-bold")}
+          className={clsx(
+            "col-start-2 xl:col-start-3",
+            pathname === "/about" && "font-bold",
+          )}
           href="/about"
         >
           About
         </Link>
       </nav>
       <span
-        className="col-start-12 flex cursor-pointer justify-end"
+        className="col-start-4 cursor-pointer self-start justify-self-end sm:col-start-6 lg:col-start-8 lg:grid xl:col-start-12"
         onClick={handleClick}
       >
         {text}
