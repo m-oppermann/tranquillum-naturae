@@ -7,20 +7,36 @@ import clsx from "clsx"
 
 interface HeaderProps {
   className?: string
+  setIsHovering?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function HeaderComponent({ className }: HeaderProps) {
+export default function HeaderComponent({
+  className,
+  setIsHovering,
+}: HeaderProps) {
   const pathname = usePathname()
   const [text, setText] = useState("Mute")
 
-  const handleClick = () => {
+  const handleSwitch = () => {
     setText(prevText => (prevText === "Mute" ? "Play" : "Mute"))
+  }
+
+  const handleLinkClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.stopPropagation()
+  }
+
+  const handleLinkMouseEnter = () => {
+    setIsHovering && setIsHovering(true)
+  }
+
+  const handleLinkMouseLeave = () => {
+    setIsHovering && setIsHovering(false)
   }
 
   return (
     <header
       className={clsx(
-        "grid grid-cols-4 gap-4 text-sm sm:grid-cols-6 sm:text-base lg:grid-cols-8 xl:grid-cols-12 2xl:text-lg",
+        "row-span-1 row-start-1 grid grid-cols-4 gap-4 text-sm sm:grid-cols-6 sm:text-base lg:grid-cols-8 xl:grid-cols-12 2xl:text-lg",
         className,
       )}
     >
@@ -28,22 +44,33 @@ export default function HeaderComponent({ className }: HeaderProps) {
         <Link
           href="/"
           className={clsx("col-start-1", pathname === "/" && "font-bold")}
+          onClick={handleLinkClick}
+          onMouseEnter={handleLinkMouseEnter}
+          onMouseLeave={handleLinkMouseLeave}
         >
           t-n
         </Link>
         <Link
+          href="/about"
           className={clsx(
             "col-start-2 xl:col-start-3",
             pathname === "/about" && "font-bold",
           )}
-          href="/about"
+          onClick={handleLinkClick}
+          onMouseEnter={handleLinkMouseEnter}
+          onMouseLeave={handleLinkMouseLeave}
         >
           About
         </Link>
       </nav>
       <span
         className="col-start-4 cursor-pointer self-start justify-self-end sm:col-start-6 lg:col-start-8 lg:grid xl:col-start-12"
-        onClick={handleClick}
+        onClick={event => {
+          handleLinkClick(event)
+          handleSwitch()
+        }}
+        onMouseEnter={handleLinkMouseEnter}
+        onMouseLeave={handleLinkMouseLeave}
       >
         {text}
       </span>
