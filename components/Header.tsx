@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { Howl } from "howler"
 import clsx from "clsx"
 
 interface HeaderProps {
@@ -15,10 +16,27 @@ export default function HeaderComponent({
   setIsHovering,
 }: HeaderProps) {
   const pathname = usePathname()
-  const [text, setText] = useState("Mute")
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const sound = useRef(
+    new Howl({
+      src: ["/audio/sound.mp3"],
+      volume: 0.05,
+      loop: true,
+    }),
+  )
+
+  useEffect(() => {
+    const currentSound = sound.current
+
+    return () => {
+      currentSound.stop()
+    }
+  }, [])
 
   const handleSwitch = () => {
-    setText(prevText => (prevText === "Mute" ? "Play" : "Mute"))
+    isPlaying ? sound.current.mute(true) : sound.current.play()
+    setIsPlaying(!isPlaying)
   }
 
   const handleLinkClick = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -72,7 +90,7 @@ export default function HeaderComponent({
         onMouseEnter={handleLinkMouseEnter}
         onMouseLeave={handleLinkMouseLeave}
       >
-        {text}
+        {isPlaying ? "Mute" : "Play"}
       </span>
     </header>
   )
