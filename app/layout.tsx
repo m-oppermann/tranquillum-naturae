@@ -2,6 +2,8 @@ import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { clsx } from "clsx"
 import { NeueMontreal } from "@/styles/fonts"
+import Providers from "@/components/Providers"
+import Header from "@/components/Header"
 
 export const metadata: Metadata = {
   title: "New Project",
@@ -21,7 +23,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           NeueMontreal.variable,
         )}
       >
-        {children}
+        <Providers>
+          <div className="grid h-full grid-rows-6 gap-4 px-4 py-4 sm:px-6 sm:pb-8 sm:pt-4 2xl:px-8 2xl:pb-10 2xl:pt-6">
+            <Header className="row-span-1 row-start-1" />
+            <main className="row-span-5 row-start-2">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   )

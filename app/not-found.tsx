@@ -1,8 +1,9 @@
 export default function NotFound() {
   return (
-    <section className="p-6">
-      <h1 className="text-4xl font-bold">Not Found</h1>
-      <p>Could not find requested resource.</p>
-    </section>
+    <div className="flex h-full flex-col justify-end">
+      <p className="text-sm sm:text-base 2xl:text-lg">
+        Could not find requested resource.
+      </p>
+    </div>
   )
 }
