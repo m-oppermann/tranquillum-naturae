@@ -1,23 +1,15 @@
-"use client"
-
-import { useContext } from "react"
-import { ImageContext } from "@/utils/contexts"
-import { images } from "@/utils/imagesData"
-import Image from "next/image"
+import type { Metadata } from "next"
+import ImageComponent from "@/components/Image"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
 
-export default function AboutPage() {
-  const { currentImageIndex } = useContext(ImageContext)
+export const metadata: Metadata = {
+  title: "tranquillum naturae | About",
+}
 
+export default function AboutPage() {
   const RepeatedImage = () => (
-    <Image
-      className="h-full w-full"
-      src={`/images/${images[currentImageIndex].name}.jpg`}
-      alt={images[currentImageIndex].alt}
-      width={72}
-      height={96}
-    />
+    <ImageComponent className="h-full w-full" width={72} height={96} />
   )
 
   const creditText = (

@@ -19,7 +19,7 @@ export default function Providers({ children }: ProvidersProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const sound = useRef(
     new Howl({
-      src: ["/audio/sound.mp3"],
+      src: ["/assets/audio/sound.mp3"],
       volume: 0.1,
       loop: true,
     }),

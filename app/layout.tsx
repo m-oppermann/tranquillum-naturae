@@ -6,8 +6,40 @@ import Providers from "@/components/Providers"
 import Header from "@/components/Header"
 
 export const metadata: Metadata = {
-  title: "New Project",
-  description: "Starter code for new project.",
+  title: "tranquillum naturae",
+  description:
+    "A collection of captured moments and thoughts on nature's mystery.",
+  openGraph: {
+    title: "tranquillum naturae",
+    description:
+      "A collection of captured moments and thoughts on nature's mystery.",
+    url: "https://tranquillum-naturae.com",
+    images: {
+      url: "/assets/images/preview.jpg",
+      width: 1200,
+      height: 630,
+    },
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "tranquillum naturae",
+    description:
+      "A collection of captured moments and thoughts on nature's mystery.",
+    images: "/assets/images/preview.jpg",
+  },
+  icons: {
+    icon: {
+      url: "/assets/icons/icon.svg",
+      sizes: "any",
+      type: "image/svg+xml",
+    },
+    apple: {
+      url: "/assets/icons/apple-touch-icon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  },
 }
 
 interface RootLayoutProps {

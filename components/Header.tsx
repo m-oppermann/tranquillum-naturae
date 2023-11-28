@@ -7,11 +7,11 @@ import { ROUTES } from "@/utils/routes"
 import Link from "next/link"
 import clsx from "clsx"
 
-interface HeaderComponentProps {
+interface HeaderProps {
   className?: string
 }
 
-export default function HeaderComponent({ className }: HeaderComponentProps) {
+export default function Header({ className }: HeaderProps) {
   const pathname = usePathname()
 
   const { isPlaying, handleSwitch } = useContext(SoundContext)
