@@ -1,11 +1,6 @@
-import type { Metadata } from "next"
 import ImageComponent from "@/components/Image"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
-
-export const metadata: Metadata = {
-  title: "tranquillum naturae | About",
-}
 
 export default function AboutPage() {
   const RepeatedImage = () => (

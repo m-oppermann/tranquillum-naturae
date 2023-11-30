@@ -1,13 +1,8 @@
-import type { Metadata } from "next"
 import Image from "next/image"
 import ImageComponent from "@/components/Image"
 import ImageDetails from "@/components/ImageDetails"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
-
-export const metadata: Metadata = {
-  title: "tranquillum naturae | Home",
-}
 
 export default function IndexPage() {
   return (
