@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity"
+import { textEditorConfig } from "../lib/config"
 
 const main = defineType({
   name: "main",
@@ -32,7 +33,7 @@ const main = defineType({
       title: "Contemplation",
       description: "Share thoughts to inspire contemplation.",
       type: "array",
-      of: [{ type: "block" }],
+      of: [textEditorConfig],
       validation: rule => rule.required().max(750),
     },
     {
@@ -40,7 +41,7 @@ const main = defineType({
       title: "About",
       description: "Information about the project.",
       type: "array",
-      of: [{ type: "block" }],
+      of: [textEditorConfig],
       validation: rule => rule.required().max(350),
     },
     {
@@ -48,7 +49,7 @@ const main = defineType({
       title: "Credits",
       description: "Project credits and links.",
       type: "array",
-      of: [{ type: "block" }],
+      of: [textEditorConfig],
       validation: rule => rule.required().max(150),
     },
     {
@@ -56,7 +57,7 @@ const main = defineType({
       title: "Copyright Notice",
       description: "Set copyright notice for the site.",
       type: "array",
-      of: [{ type: "block" }],
+      of: [textEditorConfig],
       validation: rule => rule.required().max(75),
     },
     {
