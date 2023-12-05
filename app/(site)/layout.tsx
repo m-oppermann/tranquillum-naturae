@@ -4,42 +4,45 @@ import { clsx } from "clsx"
 import { NeueMontreal } from "@/styles/fonts"
 import Providers from "@/components/Providers"
 import Header from "@/components/Header"
+import { MetaDataType } from "@/sanity/types"
+import { getMetaData } from "@/sanity/lib/query"
 
-export const metadata: Metadata = {
-  title: "tranquillum naturae",
-  description:
-    "A collection of captured moments and thoughts on nature's mystery.",
-  openGraph: {
-    title: "tranquillum naturae",
-    description:
-      "A collection of captured moments and thoughts on nature's mystery.",
-    url: "https://tranquillum-naturae.com",
-    images: {
-      url: "/assets/images/preview.jpg",
-      width: 1200,
-      height: 630,
+export async function generateMetadata(): Promise<Metadata> {
+  const [metaData]: MetaDataType[] = await getMetaData()
+
+  return {
+    title: metaData.title,
+    description: metaData.description,
+    openGraph: {
+      title: metaData.title,
+      description: metaData.description,
+      url: metaData.url,
+      images: {
+        url: metaData.previewImage.image,
+        width: 1200,
+        height: 630,
+      },
+      type: "website",
     },
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "tranquillum naturae",
-    description:
-      "A collection of captured moments and thoughts on nature's mystery.",
-    images: "/assets/images/preview.jpg",
-  },
-  icons: {
-    icon: {
-      url: "/assets/icons/icon.svg",
-      sizes: "any",
-      type: "image/svg+xml",
+    twitter: {
+      card: "summary_large_image",
+      title: metaData.title,
+      description: metaData.description,
+      images: metaData.previewImage.image,
     },
-    apple: {
-      url: "/assets/icons/apple-touch-icon.png",
-      sizes: "180x180",
-      type: "image/png",
+    icons: {
+      icon: {
+        url: metaData.icon.image,
+        sizes: "any",
+        type: "image/svg+xml",
+      },
+      apple: {
+        url: metaData.appleTouchIcon.image,
+        sizes: "180x180",
+        type: "image/png",
+      },
     },
-  },
+  }
 }
 
 interface RootLayoutProps {

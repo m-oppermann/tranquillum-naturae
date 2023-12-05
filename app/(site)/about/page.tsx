@@ -1,21 +1,22 @@
 import ImageComponent from "@/components/Image"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
+import { MainType } from "@/sanity/types"
+import { getMain } from "@/sanity/lib/query"
+import { PortableText } from "@portabletext/react"
+import { PortableTextComponents } from "@portabletext/react"
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [main]: MainType[] = await getMain()
+
+  const customTag: PortableTextComponents = {
+    block: {
+      normal: ({ children }) => <span>{children}</span>,
+    },
+  }
+
   const RepeatedImage = () => (
     <ImageComponent className="h-full w-full" width={72} height={96} />
-  )
-
-  const creditText = (
-    <>
-      Photography by <span className="italic">Matthias Oppermann</span>.
-      Designed and developed by{" "}
-      <a href="https://mtths.co" className="italic">
-        mtths ↗
-      </a>
-      .
-    </>
   )
 
   return (
@@ -27,14 +28,16 @@ export default function AboutPage() {
         )}
       >
         <p className="row-start-1">
-          <span className="italic">tranquillum naturae</span> is a collection of
-          ethereal moments captured in Gran Canaria, accompanied by
-          contemplative thoughts on the mystery of nature, exploring the essence
-          they hold within. Hopefully serving as an inspiration to cultivate a
-          sense of wonder for all of nature&apos;s expressions.{" "}
-          <span className="-sm:hidden">{creditText}</span>
+          <PortableText value={main.about} components={customTag} />
+          &nbsp;
+          <br className="-*:hidden" />
+          <span className="-sm:hidden">
+            <PortableText value={main.credits} components={customTag} />
+          </span>
         </p>
-        <p className="row-start-3 sm:hidden">{creditText}</p>
+        <div className="row-start-3 sm:hidden">
+          <PortableText value={main.credits} />
+        </div>
       </div>
       <div className="col-start-1 row-start-2 aspect-[3/4] lg:row-start-1 2xl:h-28 -sm:hidden">
         <RepeatedImage />
@@ -45,16 +48,14 @@ export default function AboutPage() {
       <div className="col-start-3 row-start-5 aspect-[3/4] lg:col-start-5 xl:col-start-6 2xl:h-28 -sm:hidden">
         <RepeatedImage />
       </div>
-      <p
+      <div
         className={clsx(
           "col-span-2 col-start-1 row-start-5 font-serif text-xs font-normal sm:col-start-5 sm:row-start-5 sm:text-sm lg:col-start-2 xl:col-start-2 2xl:text-base -sm:self-end",
           EditorialOld.variable,
         )}
       >
-        © 2023 Matthias Oppermann.
-        <br />
-        <span className="italic">All rights reserved.</span>
-      </p>
+        <PortableText value={main.copyright} />
+      </div>
     </div>
   )
 }

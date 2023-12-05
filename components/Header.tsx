@@ -1,17 +1,22 @@
 "use client"
 
-import { useContext } from "react"
+import { use, useContext } from "react"
 import { SoundContext, CursorContext } from "@/utils/contexts"
 import { usePathname } from "next/navigation"
 import { ROUTES } from "@/utils/routes"
 import Link from "next/link"
 import clsx from "clsx"
+import { NavigationType } from "@/sanity/types"
+import { getNavigation } from "@/sanity/lib/query"
 
 interface HeaderProps {
   className?: string
 }
 
+const navigationFetch = getNavigation()
+
 export default function Header({ className }: HeaderProps) {
+  const [navigation]: NavigationType[] = use(navigationFetch)
   const pathname = usePathname()
 
   const { isPlaying, handleSwitch } = useContext(SoundContext)
@@ -47,7 +52,7 @@ export default function Header({ className }: HeaderProps) {
           onMouseEnter={handleLinkMouseEnter}
           onMouseLeave={handleLinkMouseLeave}
         >
-          t-n
+          {navigation.home}
         </Link>
         <Link
           href={ROUTES.ABOUT}
@@ -59,7 +64,7 @@ export default function Header({ className }: HeaderProps) {
           onMouseEnter={handleLinkMouseEnter}
           onMouseLeave={handleLinkMouseLeave}
         >
-          About
+          {navigation.info}
         </Link>
       </nav>
       <button

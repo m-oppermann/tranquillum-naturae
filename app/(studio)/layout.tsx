@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "t-n - Sanity",
+  title: "Sanity Studio",
 }
 
 interface RootLayoutProps {
