@@ -18,14 +18,17 @@ const metaData = defineType({
       title: "Description",
       description: "Define the site description. Keep it short and concise.",
       type: "text",
-      validation: rule => rule.required().max(150),
+      validation: rule => rule.required().min(50).max(150),
     }),
     defineField({
       name: "url",
       title: "URL",
-      description: "Set the site URL. Include the protocol (https://).",
-      type: "string",
-      validation: rule => rule.required(),
+      description: "Set the URL of the site.",
+      type: "url",
+      validation: rule =>
+        rule.required().uri({
+          scheme: ["http", "https"],
+        }),
     }),
     {
       name: "previewImage",
@@ -33,15 +36,15 @@ const metaData = defineType({
       description:
         "This image will be used when sharing on social media. Upload a 1200x630 image.",
       type: "image",
-      validation: rule => rule.required(),
+      validation: rule => rule.required().assetRequired(),
     },
     {
       name: "icon",
       title: "Icon",
       description:
         "This icon will be used as the favicon. Upload a 32x32 SVG file.",
-      type: "file",
-      validation: rule => rule.required(),
+      type: "image",
+      validation: rule => rule.required().assetRequired(),
     },
     {
       name: "appleTouchIcon",
@@ -49,7 +52,7 @@ const metaData = defineType({
       description:
         "This icon will be used as the icon on iOS devices. Upload a 180x180 image.",
       type: "image",
-      validation: rule => rule.required(),
+      validation: rule => rule.required().assetRequired(),
     },
   ],
 })

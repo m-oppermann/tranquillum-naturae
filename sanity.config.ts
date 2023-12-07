@@ -14,7 +14,7 @@ import { schema } from "./sanity/schemas"
 const singletonActions = new Set(["publish", "discardChanges", "restore"])
 
 // Define the singleton document types
-export const singletonTypes = new Set(["metaData", "navigation", "main"])
+const singletonTypes = new Set(["metaData", "navigation", "main"])
 
 export default defineConfig({
   basePath: "/studio",

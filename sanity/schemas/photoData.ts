@@ -31,13 +31,15 @@ const photoData = defineType({
       title: "Photo",
       type: "image",
       description: "Upload JPEG image <1MB. ",
-      validation: rule => rule.required(),
+      options: { hotspot: true },
+      validation: rule => rule.required().assetRequired(),
       fields: [
         {
           name: "alt",
           title: "Alt",
           description: "Set alternative text for screen readers.",
           type: "string",
+          validation: rule => rule.required().max(50),
         },
       ],
     },
