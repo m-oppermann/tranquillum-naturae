@@ -3,7 +3,6 @@
 import { use, useState, useRef, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { SoundContext, CursorContext, ImageContext } from "@/utils/contexts"
-import { ROUTES } from "@/utils/routes"
 import { Howl } from "howler"
 import { clsx } from "clsx"
 import { MainType } from "@/sanity/types"
@@ -69,7 +68,7 @@ export default function Providers({ children }: ProvidersProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const handleClickNext = () => {
-    pathname === ROUTES.HOME &&
+    pathname === "/" &&
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % photoData.length)
   }
 
@@ -80,7 +79,7 @@ export default function Providers({ children }: ProvidersProps) {
           <div
             className={clsx(
               "h-full",
-              pathname === ROUTES.HOME && !isHovering && "sm:cursor-none",
+              pathname === "/" && !isHovering && "sm:cursor-none",
             )}
             onClick={handleClickNext}
             onMouseEnter={handleViewportMouseEnter}
@@ -88,7 +87,7 @@ export default function Providers({ children }: ProvidersProps) {
           >
             {children}
           </div>
-          {pathname === ROUTES.HOME && (
+          {pathname === "/" && (
             <span
               className={clsx(
                 "pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 text-sm sm:text-base 2xl:text-lg -sm:hidden",

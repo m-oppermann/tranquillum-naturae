@@ -3,7 +3,6 @@
 import { use, useContext } from "react"
 import { SoundContext, CursorContext } from "@/utils/contexts"
 import { usePathname } from "next/navigation"
-import { ROUTES } from "@/utils/routes"
 import Link from "next/link"
 import clsx from "clsx"
 import { NavigationType } from "@/sanity/types"
@@ -43,28 +42,25 @@ export default function Header({ className }: HeaderProps) {
     >
       <nav className="col-span-2 col-start-1 grid grid-cols-2 place-items-start gap-4 xl:col-span-3 xl:grid-cols-3">
         <Link
-          href={ROUTES.HOME}
-          className={clsx(
-            "col-start-1",
-            pathname === ROUTES.HOME && "font-bold",
-          )}
+          href={"/"}
+          className={clsx("col-start-1", pathname === "/" && "font-bold")}
           onClick={handleLinkClick}
           onMouseEnter={handleLinkMouseEnter}
           onMouseLeave={handleLinkMouseLeave}
         >
-          {navigation.home}
+          {navigation.homeLinkName}
         </Link>
         <Link
-          href={ROUTES.ABOUT}
+          href={navigation.infoRoute.current}
           className={clsx(
             "col-start-2 xl:col-start-3",
-            pathname === ROUTES.ABOUT && "font-bold",
+            pathname === navigation.infoRoute.current && "font-bold",
           )}
           onClick={handleLinkClick}
           onMouseEnter={handleLinkMouseEnter}
           onMouseLeave={handleLinkMouseLeave}
         >
-          {navigation.info}
+          {navigation.infoLinkName}
         </Link>
       </nav>
       <button

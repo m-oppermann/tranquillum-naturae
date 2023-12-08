@@ -19,8 +19,9 @@ export async function getNavigation() {
   return client.fetch(
     groq`*[_type == "navigation"]{
         _id,
-        home,
-        info,
+        homeLinkName,
+        infoLinkName,
+        infoRoute,
     }`,
   )
 }

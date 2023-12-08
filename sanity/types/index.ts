@@ -18,8 +18,11 @@ export type MetaDataType = {
 
 export type NavigationType = {
   _id: string
-  home: string
-  info: string
+  homeLinkName: string
+  infoLinkName: string
+  infoRoute: {
+    current: string
+  }
 }
 
 export type MainType = {

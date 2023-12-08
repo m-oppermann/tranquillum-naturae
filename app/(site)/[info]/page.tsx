@@ -5,8 +5,18 @@ import { MainType } from "@/sanity/types"
 import { getMain } from "@/sanity/lib/query"
 import { PortableText } from "@portabletext/react"
 import { PortableTextComponents } from "@portabletext/react"
+import { NavigationType } from "@/sanity/types"
+import { getNavigation } from "@/sanity/lib/query"
 
-export default async function AboutPage() {
+export async function generateStaticParams() {
+  const navigation: NavigationType[] = await getNavigation()
+
+  return navigation.map(route => ({
+    info: route.infoRoute.current,
+  }))
+}
+
+export default async function InfoPage() {
   const [main]: MainType[] = await getMain()
 
   const customTag: PortableTextComponents = {
