@@ -21,7 +21,7 @@ export default function Header({ className }: HeaderProps) {
   const { isPlaying, handleSwitch } = useContext(SoundContext)
   const { setIsHovering } = useContext(CursorContext)
 
-  const handleLinkClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+  const handleLinkClick = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation()
   }
 
@@ -54,7 +54,7 @@ export default function Header({ className }: HeaderProps) {
           href={navigation.infoRoute.current}
           className={clsx(
             "col-start-2 xl:col-start-3",
-            pathname === navigation.infoRoute.current && "font-bold",
+            pathname === "/" + navigation.infoRoute.current && "font-bold",
           )}
           onClick={handleLinkClick}
           onMouseEnter={handleLinkMouseEnter}

@@ -1,4 +1,5 @@
 import ImageComponent from "@/components/Image"
+import { notFound } from "next/navigation"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
 import { MainType } from "@/sanity/types"
@@ -16,8 +17,13 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function InfoPage() {
+export default async function InfoPage({
+  params,
+}: {
+  params: { info: string }
+}) {
   const [main]: MainType[] = await getMain()
+  const [navigation]: NavigationType[] = await getNavigation()
 
   const customTag: PortableTextComponents = {
     block: {
@@ -28,6 +34,10 @@ export default async function InfoPage() {
   const RepeatedImage = () => (
     <ImageComponent className="h-full w-full" width={72} height={96} />
   )
+
+  if (params.info !== navigation.infoRoute.current) {
+    notFound()
+  }
 
   return (
     <div className="grid h-full grid-cols-4 grid-rows-5 gap-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12">
