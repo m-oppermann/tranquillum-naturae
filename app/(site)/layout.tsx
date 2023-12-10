@@ -54,7 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body
         className={clsx(
-          "mx-auto h-screen max-w-[1920px] bg-sand-1 font-sans font-medium text-sand-8 antialiased",
+          "mx-auto h-screen min-h-[800px] max-w-[1920px] bg-sand-1 font-sans font-medium text-sand-8 antialiased",
           NeueMontreal.variable,
         )}
       >
