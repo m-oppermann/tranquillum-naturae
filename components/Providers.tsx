@@ -23,26 +23,27 @@ export default function Providers({ children }: ProvidersProps) {
   // Sound
   const [main]: MainType[] = use(mainFetch)
   const [isPlaying, setIsPlaying] = useState(false)
-  const sound = useRef(
-    new Howl({
-      src: [main.soundFile.file],
-      volume: 0.1,
-      loop: true,
-    }),
-  )
-
-  useEffect(() => {
-    const currentSound = sound.current
-    return () => {
-      currentSound.stop()
-    }
-  }, [])
+  const sound = useRef<Howl | null>(null)
 
   const handleSwitch = () => {
-    !isPlaying && sound.current.play()
-    sound.current.mute(isPlaying)
+    !isPlaying && sound.current?.play()
+    sound.current?.mute(isPlaying)
     setIsPlaying(!isPlaying)
   }
+
+  useEffect(() => {
+    if (!sound.current) {
+      sound.current = new Howl({
+        src: [main.soundFile.file],
+        volume: 0.1,
+        loop: true,
+      })
+    }
+
+    return () => {
+      sound.current?.stop()
+    }
+  }, [main])
 
   // Cursor
   const [isHovering, setIsHovering] = useState(false)
