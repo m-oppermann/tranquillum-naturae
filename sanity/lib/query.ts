@@ -7,10 +7,10 @@ export async function getMetaData() {
         _id,
         title,
         description,
-        url,
-        previewImage {"image": asset->url},
-        icon {"image": asset->url},
-        appleTouchIcon {"image": asset->url},
+        siteUrl,
+        previewImage {"url": asset->url},
+        icon {"url": asset->url},
+        appleTouchIcon {"url": asset->url},
     }`,
   )
 }
@@ -31,7 +31,10 @@ export async function getMain() {
     groq`*[_type == "main"]{
         _id,
         title,
-        drawing {alt, "image": asset->url},
+        drawing {
+          alt, 
+          "url": asset->url,
+        },
         contemplation,
         about,
         credits,
@@ -45,10 +48,14 @@ export async function getPhotoData() {
   return client.fetch(
     groq`*[_type == "photoData"] | order(_createdAt asc) {
         _id,
-        imageName,
+        name,
         coordinateNorth,
         coordinateWest,
-        photo {alt, "image": asset->url},
+        image {
+          alt, 
+          "url": asset->url,
+          "placeholder": asset->metadata.lqip
+      },
     }`,
   )
 }

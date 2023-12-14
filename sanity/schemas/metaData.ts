@@ -21,9 +21,9 @@ const metaData = defineType({
       validation: rule => rule.required().min(50).max(150),
     }),
     defineField({
-      name: "url",
+      name: "siteUrl",
       title: "URL",
-      description: "Set the URL of the site.",
+      description: "Set the URL of the site. Include https://.",
       type: "url",
       validation: rule =>
         rule.required().uri({

@@ -6,8 +6,8 @@ const photoData = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "imageName",
-      title: "Image Name",
+      name: "name",
+      title: "Name",
       description: "Set the name of the image.",
       type: "string",
       validation: rule => rule.required().max(15),
@@ -27,8 +27,8 @@ const photoData = defineType({
       validation: rule => rule.required().max(15),
     }),
     {
-      name: "photo",
-      title: "Photo",
+      name: "image",
+      title: "Image",
       type: "image",
       description: "Upload JPEG image <1MB. ",
       options: { hotspot: true },

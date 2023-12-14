@@ -1,4 +1,4 @@
-import ImageComponent from "@/components/Image"
+import CurrentImage from "@/components/CurrentImage"
 import { notFound } from "next/navigation"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
@@ -32,7 +32,7 @@ export default async function InfoPage({
   }
 
   const RepeatedImage = () => (
-    <ImageComponent className="h-full w-full" width={72} height={96} />
+    <CurrentImage className="h-full w-full" width={72} height={96} />
   )
 
   if (params.info !== navigation.infoRoute.current) {

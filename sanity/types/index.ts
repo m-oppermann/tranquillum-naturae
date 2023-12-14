@@ -4,15 +4,15 @@ export type MetaDataType = {
   _id: string
   title: string
   description: string
-  url: string
+  siteUrl: string
   previewImage: {
-    image: string
+    url: string
   }
   icon: {
-    image: string
+    url: string
   }
   appleTouchIcon: {
-    image: string
+    url: string
   }
 }
 
@@ -29,8 +29,8 @@ export type MainType = {
   _id: string
   title: string
   drawing: {
-    image: string
     alt: string
+    url: string
   }
   contemplation: PortableTextBlock[]
   about: PortableTextBlock[]
@@ -43,11 +43,12 @@ export type MainType = {
 
 export type PhotoDataType = {
   _id: string
-  imageName: string
+  name: string
   coordinateNorth: string
   coordinateWest: string
-  photo: {
-    image: string
+  image: {
     alt: string
+    url: string
+    placeholder: string
   }
 }

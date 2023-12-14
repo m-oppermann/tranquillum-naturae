@@ -16,9 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: metaData.title,
       description: metaData.description,
-      url: metaData.url,
+      url: metaData.siteUrl,
       images: {
-        url: metaData.previewImage.image,
+        url: metaData.previewImage.url,
         width: 1200,
         height: 630,
       },
@@ -28,16 +28,16 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: metaData.title,
       description: metaData.description,
-      images: metaData.previewImage.image,
+      images: metaData.previewImage.url,
     },
     icons: {
       icon: {
-        url: metaData.icon.image,
+        url: metaData.icon.url,
         sizes: "any",
         type: "image/svg+xml",
       },
       apple: {
-        url: metaData.appleTouchIcon.image,
+        url: metaData.appleTouchIcon.url,
         sizes: "180x180",
         type: "image/png",
       },

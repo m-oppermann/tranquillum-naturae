@@ -14,21 +14,25 @@ interface ImageComponentProps {
 
 const photoDataFetch = getPhotoData()
 
-export default function ImageComponent({
+export default function CurrentImage({
   className,
   width,
   height,
 }: ImageComponentProps) {
   const photoData: PhotoDataType[] = use(photoDataFetch)
   const { currentImageIndex } = useContext(ImageContext)
+  const photo = photoData[currentImageIndex]
 
   return (
     <Image
+      key={photo._id}
       className={className}
-      src={photoData[currentImageIndex].photo.image}
-      alt={photoData[currentImageIndex].photo.alt}
+      src={photo.image.url}
+      alt={photo.image.alt}
       width={width}
       height={height}
+      placeholder="blur"
+      blurDataURL={photo.image.placeholder}
     />
   )
 }
