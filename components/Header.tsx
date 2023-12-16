@@ -19,19 +19,7 @@ export default function Header({ className }: HeaderProps) {
   const pathname = usePathname()
 
   const { isPlaying, handleSwitch } = useContext(SoundContext)
-  const { setIsHovering } = useContext(CursorContext)
-
-  const handleLinkClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation()
-  }
-
-  const handleLinkMouseEnter = () => {
-    setIsHovering(true)
-  }
-
-  const handleLinkMouseLeave = () => {
-    setIsHovering(false)
-  }
+  const { setIsHovering, stopClickPropagation } = useContext(CursorContext)
 
   return (
     <header
@@ -44,9 +32,9 @@ export default function Header({ className }: HeaderProps) {
         <Link
           href={"/"}
           className={clsx("col-start-1", pathname === "/" && "font-bold")}
-          onClick={handleLinkClick}
-          onMouseEnter={handleLinkMouseEnter}
-          onMouseLeave={handleLinkMouseLeave}
+          onClick={stopClickPropagation}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
         >
           {navigation.homeLinkName}
         </Link>
@@ -56,9 +44,9 @@ export default function Header({ className }: HeaderProps) {
             "col-start-2 xl:col-start-3",
             pathname === "/" + navigation.infoRoute.current && "font-bold",
           )}
-          onClick={handleLinkClick}
-          onMouseEnter={handleLinkMouseEnter}
-          onMouseLeave={handleLinkMouseLeave}
+          onClick={stopClickPropagation}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
         >
           {navigation.infoLinkName}
         </Link>
@@ -67,11 +55,11 @@ export default function Header({ className }: HeaderProps) {
         className="col-start-4 cursor-pointer self-start justify-self-end sm:col-start-6 lg:col-start-8 lg:grid xl:col-start-12"
         aria-label={isPlaying ? "Mute audio" : "Play audio"}
         onClick={event => {
-          handleLinkClick(event)
+          stopClickPropagation(event)
           handleSwitch()
         }}
-        onMouseEnter={handleLinkMouseEnter}
-        onMouseLeave={handleLinkMouseLeave}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
         {isPlaying ? "Mute" : "Play"}
       </button>

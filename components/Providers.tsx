@@ -64,6 +64,10 @@ export default function Providers({ children }: ProvidersProps) {
   const handleViewportMouseEnter = () => setIsMouseInViewport(true)
   const handleViewportMouseLeave = () => setIsMouseInViewport(false)
 
+  const stopClickPropagation = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation()
+  }
+
   // Images
   const photoData: PhotoDataType[] = use(photoDataFetch)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -75,7 +79,12 @@ export default function Providers({ children }: ProvidersProps) {
 
   return (
     <SoundContext.Provider value={{ isPlaying, handleSwitch }}>
-      <CursorContext.Provider value={{ setIsHovering }}>
+      <CursorContext.Provider
+        value={{
+          setIsHovering,
+          stopClickPropagation,
+        }}
+      >
         <ImageContext.Provider value={{ currentImageIndex }}>
           <div
             className={clsx(
@@ -91,15 +100,14 @@ export default function Providers({ children }: ProvidersProps) {
           {pathname === "/" && (
             <span
               className={clsx(
-                "pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 text-sm sm:text-base 2xl:text-lg -sm:hidden",
+                "pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2 text-sm sm:text-base 2xl:text-lg -sm:hidden",
                 position.x === 0 && position.y === 0 && "hidden",
                 !isMouseInViewport && "hidden",
                 isHovering && "hidden",
               )}
               style={{ left: `${position.x}px`, top: `${position.y}px` }}
             >
-              (&nbsp;{currentImageIndex + 1}&nbsp;/&nbsp;{photoData.length}
-              &nbsp;)
+              {currentImageIndex + 1}&nbsp;/&nbsp;{photoData.length}
             </span>
           )}
         </ImageContext.Provider>

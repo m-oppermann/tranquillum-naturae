@@ -10,8 +10,10 @@ export const SoundContext = createContext<{
 
 export const CursorContext = createContext<{
   setIsHovering: React.Dispatch<React.SetStateAction<boolean>>
+  stopClickPropagation: (event: React.MouseEvent<HTMLElement>) => void
 }>({
   setIsHovering: () => {},
+  stopClickPropagation: () => {},
 })
 
 export const ImageContext = createContext<{
