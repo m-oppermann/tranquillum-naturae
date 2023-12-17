@@ -31,6 +31,7 @@ export default function CurrentImage({
       alt={photo.image.alt}
       width={width}
       height={height}
+      quality={100}
       placeholder="blur"
       blurDataURL={photo.image.placeholder}
     />

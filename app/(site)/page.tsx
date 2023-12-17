@@ -1,6 +1,6 @@
 import Image from "next/image"
-import CurrentImage from "@/components/CurrentImage"
 import ImageDetails from "@/components/ImageDetails"
+import MainImage from "@/components/MainImage"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
 import { MainType } from "@/sanity/types"
@@ -35,10 +35,7 @@ export default async function IndexPage() {
 
       <section className="grid-col-4 grid gap-x-4 gap-y-6 text-xs sm:row-span-2 sm:row-start-4 sm:grid-cols-6 sm:grid-rows-2 sm:gap-4 sm:text-sm lg:grid-cols-8 xl:grid-cols-12 2xl:text-base -sm:pb-4">
         <ImageDetails />
-        <div className="col-span-4 aspect-[3/4] h-full sm:col-start-2 sm:row-span-2 sm:row-start-1 lg:col-start-4 xl:col-start-6 -sm:w-full">
-          <CurrentImage className="h-full w-full" width={240} height={320} />
-        </div>
-
+        <MainImage />
         <div
           className={clsx(
             "col-span-2 col-start-1 font-serif font-normal sm:col-start-5 sm:row-start-2 lg:col-start-2 xl:col-start-2",
