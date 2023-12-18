@@ -12,6 +12,7 @@ export async function getMetaData() {
         icon {"url": asset->url},
         appleTouchIcon {"url": asset->url},
     }`,
+    { next: { revalidate: 1 } },
   )
 }
 
@@ -23,6 +24,7 @@ export async function getNavigation() {
         infoLinkName,
         infoRoute,
     }`,
+    { next: { revalidate: 1 } },
   )
 }
 
@@ -41,6 +43,7 @@ export async function getMain() {
         copyright,
         soundFile {"file": asset->url},
     }`,
+    { next: { revalidate: 1 } },
   )
 }
 
@@ -57,5 +60,6 @@ export async function getPhotoData() {
           "placeholder": asset->metadata.lqip
       },
     }`,
+    { next: { revalidate: 1 } },
   )
 }

@@ -7,6 +7,8 @@ import Header from "@/components/Header"
 import { MetaDataType } from "@/sanity/types"
 import { getMetaData } from "@/sanity/lib/query"
 
+export const dynamic = "force-static"
+
 export async function generateMetadata(): Promise<Metadata> {
   const [metaData]: MetaDataType[] = await getMetaData()
 
