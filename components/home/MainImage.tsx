@@ -1,12 +1,17 @@
 "use client"
 
 import { useState, useEffect, useContext } from "react"
-import CurrentImage from "./CurrentImage"
+import CurrentImage from "../CurrentImage"
 import { CursorContext } from "@/utils/contexts"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
+import { PhotoDataType } from "@/sanity/types"
 
-export default function MainImage() {
+interface MainImageProps {
+  photoData: PhotoDataType[]
+}
+
+export default function MainImage({ photoData }: MainImageProps) {
   const { setIsHovering, stopClickPropagation } = useContext(CursorContext)
   const [isZoomed, setIsZoomed] = useState(false)
 
@@ -49,7 +54,12 @@ export default function MainImage() {
             ( <em>Close</em> )
           </button>
         )}
-        <CurrentImage className="h-full w-full" width={300} height={400} />
+        <CurrentImage
+          className="h-full w-full"
+          width={300}
+          height={400}
+          photoData={photoData}
+        />
       </div>
       {isZoomed && (
         <div className="pointer-events-none fixed left-0 top-0 z-0 h-screen min-h-[800px] w-screen bg-gradient-to-b from-sand-1 from-45%" />

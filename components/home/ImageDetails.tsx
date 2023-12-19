@@ -1,16 +1,15 @@
 "use client"
 
-import { use, useContext } from "react"
+import { useContext } from "react"
 import { ImageContext } from "@/utils/contexts"
 import { PhotoDataType } from "@/sanity/types"
-import { getPhotoData } from "@/sanity/lib/query"
 
-const photoFetch = getPhotoData()
+interface ImageDetailsProps {
+  photoData: PhotoDataType[]
+}
 
-export default function ImageDetails() {
-  const photoData: PhotoDataType[] = use(photoFetch)
+export default function ImageDetails({ photoData }: ImageDetailsProps) {
   const { currentImageIndex } = useContext(ImageContext)
-
   const photo = photoData[currentImageIndex]
 
   return (

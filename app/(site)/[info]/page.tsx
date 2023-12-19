@@ -2,12 +2,10 @@ import CurrentImage from "@/components/CurrentImage"
 import { notFound } from "next/navigation"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
-import { MainType } from "@/sanity/types"
-import { getMain } from "@/sanity/lib/query"
 import { PortableText } from "@portabletext/react"
 import { PortableTextComponents } from "@portabletext/react"
-import { NavigationType } from "@/sanity/types"
-import { getNavigation } from "@/sanity/lib/query"
+import { NavigationType, MainType, PhotoDataType } from "@/sanity/types"
+import { getNavigation, getMain, getPhotoData } from "@/sanity/lib/query"
 
 export async function generateStaticParams() {
   const navigation: NavigationType[] = await getNavigation()
@@ -24,6 +22,7 @@ export default async function InfoPage({
 }) {
   const [main]: MainType[] = await getMain()
   const [navigation]: NavigationType[] = await getNavigation()
+  const photoData: PhotoDataType[] = await getPhotoData()
 
   const customTag: PortableTextComponents = {
     block: {
@@ -32,7 +31,12 @@ export default async function InfoPage({
   }
 
   const RepeatedImage = () => (
-    <CurrentImage className="h-full w-full" width={72} height={96} />
+    <CurrentImage
+      className="h-full w-full"
+      width={72}
+      height={96}
+      photoData={photoData}
+    />
   )
 
   if (params.info !== navigation.infoRoute.current) {

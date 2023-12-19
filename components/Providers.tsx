@@ -5,23 +5,22 @@ import { usePathname } from "next/navigation"
 import { SoundContext, CursorContext, ImageContext } from "@/utils/contexts"
 import { Howl } from "howler"
 import { clsx } from "clsx"
-import { MainType } from "@/sanity/types"
-import { getMain } from "@/sanity/lib/query"
-import { PhotoDataType } from "@/sanity/types"
-import { getPhotoData } from "@/sanity/lib/query"
+import { MainType, PhotoDataType } from "@/sanity/types"
 
 interface ProvidersProps {
   children: React.ReactNode
+  main: MainType
+  photoData: PhotoDataType[]
 }
 
-const mainFetch = getMain()
-const photoDataFetch = getPhotoData()
-
-export default function Providers({ children }: ProvidersProps) {
+export default function Providers({
+  children,
+  main,
+  photoData,
+}: ProvidersProps) {
   const pathname = usePathname()
 
   // Sound
-  const [main]: MainType[] = use(mainFetch)
   const [isPlaying, setIsPlaying] = useState(false)
   const sound = useRef<Howl | null>(null)
 
@@ -69,7 +68,6 @@ export default function Providers({ children }: ProvidersProps) {
   }
 
   // Images
-  const photoData: PhotoDataType[] = use(photoDataFetch)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const handleClickNext = () => {

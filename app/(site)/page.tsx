@@ -1,14 +1,15 @@
 import Image from "next/image"
-import ImageDetails from "@/components/ImageDetails"
-import MainImage from "@/components/MainImage"
+import ImageDetails from "@/components/home/ImageDetails"
+import MainImage from "@/components/home/MainImage"
 import { clsx } from "clsx"
 import { EditorialOld } from "@/styles/fonts"
-import { MainType } from "@/sanity/types"
-import { getMain } from "@/sanity/lib/query"
 import { PortableText } from "@portabletext/react"
+import { MainType, PhotoDataType } from "@/sanity/types"
+import { getMain, getPhotoData } from "@/sanity/lib/query"
 
 export default async function IndexPage() {
   const [main]: MainType[] = await getMain()
+  const photoData: PhotoDataType[] = await getPhotoData()
 
   return (
     <div className="grid h-full gap-y-16 sm:grid-rows-5 sm:gap-4">
@@ -34,8 +35,8 @@ export default async function IndexPage() {
       </section>
 
       <section className="grid-col-4 grid gap-x-4 gap-y-6 text-xs sm:row-span-2 sm:row-start-4 sm:grid-cols-6 sm:grid-rows-2 sm:gap-4 sm:text-sm lg:grid-cols-8 xl:grid-cols-12 2xl:text-base -sm:pb-4">
-        <ImageDetails />
-        <MainImage />
+        <ImageDetails photoData={photoData} />
+        <MainImage photoData={photoData} />
         <div
           className={clsx(
             "col-span-2 col-start-1 font-serif font-normal sm:col-start-5 sm:row-start-2 lg:col-start-2 xl:col-start-2",

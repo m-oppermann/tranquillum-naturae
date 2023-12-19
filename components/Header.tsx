@@ -1,21 +1,18 @@
 "use client"
 
-import { use, useContext } from "react"
+import { useContext } from "react"
 import { SoundContext, CursorContext } from "@/utils/contexts"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import clsx from "clsx"
 import { NavigationType } from "@/sanity/types"
-import { getNavigation } from "@/sanity/lib/query"
 
 interface HeaderProps {
   className?: string
+  navigation: NavigationType
 }
 
-const navigationFetch = getNavigation()
-
-export default function Header({ className }: HeaderProps) {
-  const [navigation]: NavigationType[] = use(navigationFetch)
+export default function Header({ className, navigation }: HeaderProps) {
   const pathname = usePathname()
 
   const { isPlaying, handleSwitch } = useContext(SoundContext)
