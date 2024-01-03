@@ -21,3 +21,11 @@ export const ImageContext = createContext<{
 }>({
   currentImageIndex: 0,
 })
+
+export const AnimationContext = createContext<{
+  hasAnimatedHome: boolean
+  hasAnimatedInfo: boolean
+}>({
+  hasAnimatedHome: false,
+  hasAnimatedInfo: false,
+})

@@ -5,17 +5,17 @@ import { NeueMontreal } from "@/styles/fonts"
 import Providers from "@/components/Providers"
 import Header from "@/components/Header"
 import {
-  MetaDataType,
-  NavigationType,
-  MainType,
-  PhotoDataType,
-} from "@/sanity/types"
-import {
   getMetaData,
   getNavigation,
   getMain,
   getPhotoData,
 } from "@/sanity/lib/query"
+import {
+  MetaDataType,
+  NavigationType,
+  MainType,
+  PhotoDataType,
+} from "@/sanity/types"
 
 export const dynamic = "force-static"
 
@@ -74,7 +74,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           NeueMontreal.variable,
         )}
       >
-        <Providers main={main} photoData={photoData}>
+        <Providers navigation={navigation} main={main} photoData={photoData}>
           <div className="grid h-full grid-rows-6 gap-4 px-4 py-4 sm:px-6 sm:pb-8 sm:pt-4 2xl:px-8 2xl:pb-10 2xl:pt-6">
             <Header
               className="row-span-1 row-start-1"

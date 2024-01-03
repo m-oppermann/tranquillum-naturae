@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { useContext } from "react"
+import Image from "next/image"
 import { ImageContext } from "@/utils/contexts"
 import { PhotoDataType } from "@/sanity/types"
 

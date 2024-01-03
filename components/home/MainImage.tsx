@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useEffect, useContext } from "react"
-import CurrentImage from "../CurrentImage"
-import { CursorContext } from "@/utils/contexts"
 import { clsx } from "clsx"
+import { motion } from "framer-motion"
 import { EditorialOld } from "@/styles/fonts"
+import { CursorContext } from "@/utils/contexts"
+import CurrentImage from "../CurrentImage"
 import { PhotoDataType } from "@/sanity/types"
 
 interface MainImageProps {
@@ -29,30 +30,35 @@ export default function MainImage({ photoData }: MainImageProps) {
 
   return (
     <>
-      <div
+      <motion.div
         className={clsx(
           "aspect-[3/4]",
           isZoomed
-            ? "fixed left-1/2 z-10 -translate-x-1/2 cursor-zoom-out bg-gradient-to-b from-sand-1 font-serif sm:bottom-8 sm:h-3/4 2xl:bottom-10"
-            : "col-span-4 h-full sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:cursor-zoom-in lg:col-start-4 xl:col-start-6 -sm:w-full",
+            ? "fixed left-0 right-0 z-10 m-auto cursor-zoom-out bg-gradient-to-b from-sand-1 font-serif sm:bottom-8 sm:h-3/4 2xl:bottom-10"
+            : "h-full sm:cursor-zoom-in -sm:w-full",
           EditorialOld.variable,
         )}
+        layout
         onClick={event => {
           if (window.innerWidth > 640) {
             stopClickPropagation(event)
             setIsZoomed(!isZoomed)
+            setIsHovering(true)
           }
         }}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         {isZoomed && (
-          <button
-            onClick={() => setIsHovering(false)}
+          <motion.button
             className="absolute left-1/2 -translate-x-1/2 text-sm sm:-top-12 sm:text-base 2xl:-top-14 2xl:text-lg"
+            initial={{ opacity: 0, x: "-50%", y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            onClick={() => setIsHovering(false)}
           >
             ( <em>Close</em> )
-          </button>
+          </motion.button>
         )}
         <CurrentImage
           className="h-full w-full"
@@ -60,9 +66,13 @@ export default function MainImage({ photoData }: MainImageProps) {
           height={400}
           photoData={photoData}
         />
-      </div>
+      </motion.div>
       {isZoomed && (
-        <div className="pointer-events-none fixed left-0 top-0 z-0 h-screen min-h-[800px] w-screen bg-gradient-to-b from-sand-1 from-45%" />
+        <motion.div
+          className="pointer-events-none fixed left-0 top-0 z-0 h-screen min-h-[800px] w-screen bg-gradient-to-b from-sand-1 from-45%"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        />
       )}
     </>
   )
