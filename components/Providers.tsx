@@ -38,18 +38,16 @@ export default function Providers({
   }
 
   useEffect(() => {
-    if (!sound.current) {
-      sound.current = new Howl({
-        src: [main.soundFile.file],
-        volume: 0.1,
-        loop: true,
-      })
-    }
+    sound.current = new Howl({
+      src: [main.soundFile.file],
+      volume: 0.1,
+      loop: true,
+    })
 
     return () => {
       sound.current?.stop()
     }
-  }, [main])
+  }, [main.soundFile.file])
 
   // Cursor
   const [isHovering, setIsHovering] = useState(false)
