@@ -1,5 +1,7 @@
 import "@/styles/globals.css"
 import type { Metadata } from "next"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { clsx } from "clsx"
 import { NeueMontreal } from "@/styles/fonts"
 import Providers from "@/components/Providers"
@@ -83,6 +85,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             <main className="row-span-5 row-start-2">{children}</main>
           </div>
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
