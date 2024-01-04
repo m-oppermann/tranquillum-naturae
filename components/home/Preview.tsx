@@ -19,13 +19,13 @@ export default function Preview({ main, photoData }: PreviewProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex(prevIndex => {
-        if (prevIndex < 3) {
+        if (prevIndex < photoData.length - 1) {
           return prevIndex + 1
         }
         setPreview(false)
         return prevIndex
       })
-    }, 500)
+    }, 200)
 
     return () => {
       clearInterval(interval)
