@@ -32,6 +32,10 @@ export default function Providers({
   const sound = useRef<Howl | null>(null)
 
   const handleSwitch = () => {
+    if (sound.current?.state() === "unloaded") {
+      sound.current?.load()
+    }
+
     !isPlaying && sound.current?.play()
     sound.current?.mute(isPlaying)
     setIsPlaying(!isPlaying)
@@ -42,6 +46,7 @@ export default function Providers({
       src: [main.soundFile.file],
       volume: 0.1,
       loop: true,
+      preload: false,
     })
 
     return () => {
