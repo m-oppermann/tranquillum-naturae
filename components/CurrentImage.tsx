@@ -9,6 +9,7 @@ interface CurrentImageProps {
   className?: string
   width: number
   height: number
+  quality?: number
   photoData: PhotoDataType[]
 }
 
@@ -16,6 +17,7 @@ export default function CurrentImage({
   className,
   width,
   height,
+  quality,
   photoData,
 }: CurrentImageProps) {
   const { currentImageIndex } = useContext(ImageContext)
@@ -29,7 +31,7 @@ export default function CurrentImage({
       alt={photo.image.alt}
       width={width}
       height={height}
-      quality={100}
+      quality={quality}
       placeholder="blur"
       blurDataURL={photo.image.placeholder}
     />

@@ -64,6 +64,7 @@ export default function MainImage({ photoData }: MainImageProps) {
           className="h-full w-full"
           width={300}
           height={400}
+          quality={isZoomed ? 100 : 75}
           photoData={photoData}
         />
       </motion.div>
